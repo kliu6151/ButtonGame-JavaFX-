@@ -1,0 +1,18 @@
+.root{
+    -fx-background-color: black;
+}
+.label{
+    -fx-font-size:20;
+}
+Button
+{
+    -fx-min-width: 30px;
+    -fx-max-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+    -fx-display: center;
+}
+Button:pressed
+{
+    -fx-background-color: pink;
+}
