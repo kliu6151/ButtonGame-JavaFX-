@@ -11,6 +11,7 @@ Button
     -fx-min-height: 30px;
     -fx-max-height: 30px;
     -fx-display: center;
+    -fx-background-color: white;
 }
 Button:pressed
 {

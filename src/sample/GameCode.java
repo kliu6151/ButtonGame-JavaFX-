@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
 import javafx.scene.text.TextBuilder;
+import javafx.util.Duration;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -75,41 +78,61 @@ public class GameCode extends Application{
         root.getChildren().addAll(buttonContainer, controlContainer);
         scene.getStylesheets().add(this.getClass().getResource("Display.css").toExternalForm());
 
-        startButton.setOnAction(new EventHandler<ActionEvent>() {
+        Timeline loop = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
 
                                     public void handle(ActionEvent event) {
                                         controlContainer.getChildren().removeAll(startButton, name);
                                         int round = 0;
                                         for(int i = 0; i< round + 1;i++)
                                         {
-                                            int r = (int)((Math.random() *4) + 1);
-                                            System.out.println(i);
-                                            System.out.println(r);
-                                            if(r == 1)
-                                            {
-                                                button1.setStyle("-fx-background-color: yellow;");
-                                            }
-                                            if(r == 2)
-                                            {
-                                                button2.setStyle("-fx-background-color: yellow;");
-                                            }
-                                            if(r == 3)
-                                            {
-                                                button3.setStyle("-fx-background-color: yellow;");
-                                            }
-                                            if(r == 4)
-                                            {
-                                                button4.setStyle("-fx-background-color: yellow;");
-                                            }
+                                            for(int j = 0;j<round + 1;j++) {
+                                                int r = (int) ((Math.random() * 4) + 1);
+                                                System.out.println(i);
+                                                System.out.println(r);
+                                                if (r == 1) {
+                                                    button1.setStyle("-fx-background-color: yellow;");
+                                                    try {
+                                                        Thread.sleep(300);
+                                                    } catch (InterruptedException error) {
+                                                        System.out.println("OW");
+                                                    }
+                                                    button1.setStyle("-fx-background-color: white;");
+                                                }
+                                                if (r == 2) {
+                                                    button2.setStyle("-fx-background-color: yellow;");
+                                                    try {
+                                                        Thread.sleep(300);
+                                                    } catch (InterruptedException error) {
+                                                        System.out.println("OW");
+                                                    }
+                                                    button2.setStyle("-fx-background-color: white;");
 
-                                            round++;
-                                            try
-                                            {
-                                                wait(100);
-                                            }
-                                            catch ( InterruptedException error)
-                                            {
-                                                System.out.println("OW");
+                                                }
+                                                if (r == 3) {
+                                                    button3.setStyle("-fx-background-color: yellow;");
+                                                    try {
+                                                        Thread.sleep(300);
+                                                    } catch (InterruptedException error) {
+                                                        System.out.println("OW");
+                                                    }
+                                                    button3.setStyle("-fx-background-color: white;");
+
+                                                }
+                                                if (r == 4) {
+                                                    button4.setStyle("-fx-background-color: yellow;");
+                                                    try {
+                                                        Thread.sleep(300);
+                                                    } catch (InterruptedException error) {
+                                                        System.out.println("OW");
+                                                    }
+                                                    button4.setStyle("-fx-background-color: white;");
+                                                }
+
+                                                try {
+                                                    Thread.sleep(300);
+                                                } catch (InterruptedException error) {
+                                                    System.out.println("OW");
+                                                }
                                             }
                                         }
                                     }
