@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -78,65 +79,48 @@ public class GameCode extends Application{
         root.getChildren().addAll(buttonContainer, controlContainer);
         scene.getStylesheets().add(this.getClass().getResource("Display.css").toExternalForm());
 
-        Timeline loop = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
+        startButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                controlContainer.getChildren().removeAll(startButton, name);
 
-                                    public void handle(ActionEvent event) {
-                                        controlContainer.getChildren().removeAll(startButton, name);
-                                        int round = 0;
-                                        for(int i = 0; i< round + 1;i++)
-                                        {
-                                            for(int j = 0;j<round + 1;j++) {
-                                                int r = (int) ((Math.random() * 4) + 1);
-                                                System.out.println(i);
-                                                System.out.println(r);
-                                                if (r == 1) {
-                                                    button1.setStyle("-fx-background-color: yellow;");
-                                                    try {
-                                                        Thread.sleep(300);
-                                                    } catch (InterruptedException error) {
-                                                        System.out.println("OW");
-                                                    }
-                                                    button1.setStyle("-fx-background-color: white;");
-                                                }
-                                                if (r == 2) {
-                                                    button2.setStyle("-fx-background-color: yellow;");
-                                                    try {
-                                                        Thread.sleep(300);
-                                                    } catch (InterruptedException error) {
-                                                        System.out.println("OW");
-                                                    }
-                                                    button2.setStyle("-fx-background-color: white;");
+                new AnimationTimer() {
+                    private long tick;
+                    private int round = 1;
 
-                                                }
-                                                if (r == 3) {
-                                                    button3.setStyle("-fx-background-color: yellow;");
-                                                    try {
-                                                        Thread.sleep(300);
-                                                    } catch (InterruptedException error) {
-                                                        System.out.println("OW");
-                                                    }
-                                                    button3.setStyle("-fx-background-color: white;");
+                    @Override
+                    public void handle(long now) {
+                        if (this.tick == 0) this.tick = now;
+                        long dt = now - this.tick;
+                        int i=0;
 
-                                                }
-                                                if (r == 4) {
-                                                    button4.setStyle("-fx-background-color: yellow;");
-                                                    try {
-                                                        Thread.sleep(300);
-                                                    } catch (InterruptedException error) {
-                                                        System.out.println("OW");
-                                                    }
-                                                    button4.setStyle("-fx-background-color: white;");
-                                                }
+                        if (dt > 0.5 * 1e9) {
+                            button1.setStyle("-fx-background-color: white;");
+                            button2.setStyle("-fx-background-color: white;");
+                            button3.setStyle("-fx-background-color: white;");
+                            button4.setStyle("-fx-background-color: white;");
+                        }
 
-                                                try {
-                                                    Thread.sleep(300);
-                                                } catch (InterruptedException error) {
-                                                    System.out.println("OW");
-                                                }
-                                            }
-                                        }
-                                    }
-                                });
+                        if (dt > 1 * 1e9) {
+                            System.out.println("Per 3s");
+                            int r = ((int)(Math.random() * 4) + 1);
+                            if (r == 1) {
+                                button1.setStyle("-fx-background-color: yellow;");
+                            }
+                            if (r == 2) {
+                                button2.setStyle("-fx-background-color: yellow;");
+                            }
+                            if (r == 3) {
+                                button3.setStyle("-fx-background-color: yellow;");
+                            }
+                            if (r == 4) {
+                                button4.setStyle("-fx-background-color: yellow;");
+                            }
+
+                            }
+                        }
+                }.start();
+            }
+        });
 
         primaryStage.show();
     }
